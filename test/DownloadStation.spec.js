@@ -33,4 +33,13 @@ describe('DownloadStation API', () => {
     console.log(result)
     expect(result.success).to.be.true
   })
+
+  it('setRequestOption', async function () {
+    ds.setRequestOption({headers:{
+      socketName: 'brpoper'
+    }})
+    const result = await ds.getTasks()
+    console.log(result)
+    expect(result.success).to.be.true
+  })
 })

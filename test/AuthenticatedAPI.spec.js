@@ -66,30 +66,4 @@ describe('AuthenticatedAPI', () => {
     expect(downloadListResult.success).to.equal(true)
   })
 
-  it('setRequestOption', function () {
-    const authApi = new AuthenticatedAPI(
-      {
-        protocol: "http",
-        address: "192.168.3.133",
-        port: "5000",
-        username: "",
-        password: "",
-        debug: false,
-        token: "",
-        success: false,
-        message: ""
-      }
-    )
-
-    authApi.setRequestOption({headers:{
-      socketName: 'brpoper'
-    }})
-
-    expect(authApi.requstOption).to.deep.equal({
-      headers: {
-        socketName: 'brpoper'
-      }
-    })
-
-  })
 })
