@@ -36,20 +36,60 @@ describe('AuthenticatedAPI', () => {
   })
 
   it('request with token', async function () {
-    const token = 'EzH2McsPpoUzE1690O6N720701'
-    const reqParams = _.assignIn(options, {token: 'EzH2McsPpoUzE1690O6N720701'})
+    const token = '64pdCnDbQR5jg1690O6N720701'
+    const reqParams = _.assignIn(options, {token: '64pdCnDbQR5jg1690O6N720701'})
     const result = await authedAPI.request(options)
     expect(result.success).to.equal(true)
   })
 
   it('request with login', async function () {
-    const result = await authedAPI.login({
+    const loginAPI = new AuthenticatedAPI(
+      {
+        protocol: "http",
+        address: "192.168.3.133",
+        port: "5000",
+        username: "",
+        password: "",
+        debug: false,
+        token: "",
+        success: false,
+        message: ""
+      }
+    )
+    const result = await loginAPI.login({
       account: 'brpoper',
       passwd: '1313113'
     })
     const sid = result.data.sid
-    expect(authedAPI.token).to.equal(sid)
-    const downloadListResult = await authedAPI.request(options)
+    expect(loginAPI.token).to.equal(sid)
+    const downloadListResult = await loginAPI.request(options)
     expect(downloadListResult.success).to.equal(true)
+  })
+
+  it('setRequestOption', function () {
+    const authApi = new AuthenticatedAPI(
+      {
+        protocol: "http",
+        address: "192.168.3.133",
+        port: "5000",
+        username: "",
+        password: "",
+        debug: false,
+        token: "",
+        success: false,
+        message: ""
+      }
+    )
+
+    authApi.setRequestOption({headers:{
+      socketName: 'brpoper'
+    }})
+
+    expect(authApi.requstOption).to.deep.equal({
+      headers: {
+        socketName: 'brpoper'
+      }
+    })
+
   })
 })
