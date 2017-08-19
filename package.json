@@ -1,6 +1,6 @@
 {
   "name": "synoapi",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "syno api sdk",
   "main": "lib/index.js",
   "scripts": {
